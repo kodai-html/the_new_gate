@@ -8,6 +8,10 @@ use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+      }
+
     /**
      * 商品一覧を表示する
      * 
