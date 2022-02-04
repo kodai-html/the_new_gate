@@ -5,9 +5,10 @@
     @csrf
     <input type="hidden" name="id" value="{{ $product->id }}">
     <div class="my-5">
+      <p>商品ID：{{ $product->id }}</p>
       <input type="file" name="image_path"/>
       @if ($product->image_path !=='')
-        <img src="{{ asset('/storage/' . $product->image_path) }}" width=25px>
+        <img src="{{ asset('/storage/' . $product->image_path) }}" width=25%>
       @else
         <p>NO IMAGE</p>
       @endif
@@ -63,8 +64,8 @@
           </div>
       @endif
     </div>
-    <a href="{{ route('list') }}">キャンセル</a>
-    <button type="submit">更新する</button>
+    <a href="{{ route('detail', $product->id) }}" class="btn btn-primary">戻る</a>
+    <button type="submit" class="btn btn-primary">更新する</button>
   </form>
 </div>
 @endsection

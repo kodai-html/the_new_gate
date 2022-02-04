@@ -104,7 +104,7 @@ class ProductController extends Controller
         }
 
         \Session::flash('err_msg', '商品を登録しました。');
-        return redirect(route('list'));
+        return redirect(route('store'));
     }
 
     /**
@@ -179,7 +179,7 @@ class ProductController extends Controller
         }
 
         \Session::flash('err_msg', '更新しました。');
-        return redirect(route('list'));
+        return redirect(route('edit', $product->id));
     }
 
     /**

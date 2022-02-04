@@ -1,3 +1,3 @@
 <div class="m-5">
-    <a href="{{ route('create') }}">商品投稿</a>
+    <h1>商品管理アプリ</h1>
 </div>

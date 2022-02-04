@@ -20,7 +20,7 @@
                 <td ><img src="{{ asset('/storage/' . $product->image_path) }}" alt="写真" width=20%/></td>
                 <br>
                 <td><a href="{{ route('edit', $product->id) }}" class="btn btn-primary">編集</a></td>
-                <a href="{{ route('list') }}" class="ml-3">一覧へ戻る</a>
+                <a href="{{ route('list') }}" class="btn btn-primary">一覧へ戻る</a>
             </tr>
         </div>
     </div>
