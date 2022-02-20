@@ -12,17 +12,18 @@
         <div class="m-5">
             <form class="form-inline" action="{{ route('list') }}">
                 <input type="text" name="keyword" class="form-control" placeholder="商品名を入力してください">
-                <input type="submit" value="検索" class="btn btn-info">
-            </form>
-        </div>
-        <div  class="m-5">
-            <form class="form-inline" action="{{ route('list') }}">
-                <select class="form-control" id="tag-id" name="manufacture">
-                    @foreach (Config::get('array.manufacture') as $key => $val)
-                        <option value="{{ $key }}">{{ $val }}</option>
+          
+                <select class="form-control ml-3" id="tag-id" name="company_id">
+
+                    {{ $num = 0 }}
+                    <option value=""></option>
+                    @foreach($companies as $company)
+                    {{ $num += 1 }}
+                    <option value ="{{ $num }}">{{ $company->company_name }}</option>
+
                     @endforeach
                 </select>
-                <input type="submit" value="検索" class="btn btn-info">
+                <input type="submit" value="検索" class="btn btn-info ml-3">
             </form>
         </div>
         <table class="table">
@@ -42,14 +43,14 @@
             <tbody>
             @foreach($products as $product)
                 <tr>
-                    <td width: 10%>{{ $product->id }}</td>
-                    <td width: 10%>{{ $product->manufacture }}</td>
+                    <td width: 10%>{{ $product->product_id }}</td>
+                    <td width: 10%>{{ $product->company_name }}</td>
                     <td width: 10%>{{ $product->product_name }}</td>
                     <td width: 10%>{{ $product->price }}</td>
                     <td width: 10%>{{ $product->stock }}</td>
                     <td ><img src="{{ asset('/storage/' . $product->image_path) }}" alt="写真" width=100% /></td>
-                    <td><a href="{{ route('detail', $product->id) }}" class="btn btn-primary">詳細表示</a></td>
-                    <form method="POST" action="{{ route('delete', $product->id) }}" onSubmit="return checkDelete()">
+                    <td><a href="{{ route('detail', $product->product_id) }}" class="btn btn-primary">詳細表示</a></td>
+                    <form method="POST" action="{{ route('delete', $product->product_id) }}" onSubmit="return checkDelete()">
                     @csrf
                     <td><button type="submit" class="btn btn-primary">削除</button></td>
                 </tr>
@@ -57,13 +58,4 @@
             </tbody>
         </table>
     </div>
-    <script>
-    function checkDelete() {
-      if(window.confirm('削除してよろしいですか')) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    </script>
 @endsection

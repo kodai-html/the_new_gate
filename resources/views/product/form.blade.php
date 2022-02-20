@@ -7,10 +7,13 @@
       <input type="file" name="image_path" />
     </div>
     <div>
-      <select name= "manufacture">
-        <option value = "サントリーー">サントリーー</option>
-        <option value = "コカコーーラ">コカコーーラ</option>
-        <option value = "イトーーエン">イトーーエン</option>
+      <select name= "company_id">
+        {{ $num = 0 }}
+        @foreach($companies as $company)
+          {{ $num += 1 }}
+          <option value ="{{ $num }}">{{ $company->company_name }}</option>
+
+        @endforeach
       </select>
     </div>
     <div class="mt-5">

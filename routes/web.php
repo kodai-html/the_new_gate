@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/','productController@showList')->name('list');
-
 Route::get('/product/create','productController@showCreate')->name('create');
 
 Route::post('/product/store','productController@exeStore')->name('store');
@@ -21,7 +19,9 @@ Route::get('/product/{id}','productController@showDetail')->name('detail');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/','productController@showList')->name('list');
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/product/edit/{id}','productController@showEdit')->name('edit');
 

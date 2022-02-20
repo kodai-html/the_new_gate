@@ -8,6 +8,7 @@
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/product.js') }}" defer></script>
     </head>
     <body>
         <header>

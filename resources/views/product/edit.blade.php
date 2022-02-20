@@ -3,21 +3,21 @@
 <div class="m-5">
   <form method="POST" action="{{ route('update') }}" enctype='multipart/form-data'>
     @csrf
-    <input type="hidden" name="id" value="{{ $product->id }}">
+    <input type="hidden" name="id" value="{{ $product->product_id }}">
     <div class="my-5">
-      <p>商品ID：{{ $product->id }}</p>
+      <p>商品ID：{{ $product->product_id }}</p>
       <input type="file" name="image_path"/>
-      @if ($product->image_path !=='')
+      @if ($product->image_path !=="")
         <img src="{{ asset('/storage/' . $product->image_path) }}" width=25%>
       @else
         <p>NO IMAGE</p>
       @endif
     </div>
     <div>
-      <select name= "manufacture">
+      <select name= "company_id">
         @foreach (Config::get('array.manufacture') as $key => $val)
             <option value="{{ $key }}"
-                @if ( $product->manufacture == $key ) 
+                @if ( $product->company_id == $key ) 
                     selected
                 @endif
             >{{ $val }}</option>
@@ -64,7 +64,7 @@
           </div>
       @endif
     </div>
-    <a href="{{ route('detail', $product->id) }}" class="btn btn-primary">戻る</a>
+    <a href="{{ route('detail', $product->product_id) }}" class="btn btn-primary">戻る</a>
     <button type="submit" class="btn btn-primary">更新する</button>
   </form>
 </div>
