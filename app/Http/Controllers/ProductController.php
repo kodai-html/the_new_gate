@@ -51,7 +51,7 @@ class ProductController extends Controller
 
             $products = $model->getKeywordProduct($keyword);
 
-            return view('product.list', ['products' => $products])
+            return view('product.list', ['products' => $products], ['companies' => $companies])
             ->with('keyword',$keyword)
             ->with('product_name');
         }
@@ -62,6 +62,30 @@ class ProductController extends Controller
             
             return view('product.list', ['products' => $products], ['companies' => $companies]);
         }
+    }
+
+        /**
+     * 商品一覧を表示する
+     * 
+     * @return view
+     */
+    public function filterProductByKeywords(Request $request) {
+
+        // Get the ke
+        // $keyword = $request->input('keyword');
+        // $maker = $request->input('company_id');
+
+
+        // $model = new Product();
+
+        // $products = $model->getProductByKeyword();
+
+        // return [
+        //     'a'=>1
+        // ];
+        dd($request);
+        echo "HELLO";
+        return view('product.list', ['products' => 0]);
     }
 
     /**

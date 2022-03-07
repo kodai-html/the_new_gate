@@ -7,6 +7,7 @@
         <title>@yield('title')</title>
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="{{ asset('js/product.js') }}" defer></script>
     </head>

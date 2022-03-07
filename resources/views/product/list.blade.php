@@ -10,10 +10,10 @@
             </p>
         @endif
         <div class="m-5">
-            <form class="form-inline" action="{{ route('list') }}">
-                <input type="text" name="keyword" class="form-control" placeholder="商品名を入力してください">
+            <form class="form-inline">
+                <input type="text" name="keyword" class="keyword form-control" placeholder="商品名を入力してください">
           
-                <select class="form-control ml-3" id="tag-id" name="company_id">
+                <select class="maker form-control ml-3" id="tag-id" name="company_id">
 
                     {{ $num = 0 }}
                     <option value=""></option>

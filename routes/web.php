@@ -17,9 +17,13 @@ Route::post('/product/store','productController@exeStore')->name('store');
 
 Route::get('/product/{id}','productController@showDetail')->name('detail');
 
-Auth::routes();
+Route::get('/product/search','productController@filterProductByKeywords')->name('search');
 
+Auth::routes();
+// http://server.com/products/
+// localhost8888/public/
 Route::get('/','productController@showList')->name('list');
+// Route::get('/test','productController@filterProductByKeywords')->name('list');
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
