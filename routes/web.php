@@ -17,7 +17,11 @@ Route::post('/product/store','productController@exeStore')->name('store');
 
 Route::get('/product/{id}','productController@showDetail')->name('detail');
 
-Route::get('/product/search','productController@filterProductByKeywords')->name('search');
+Route::post('/product/search','productController@filterProductByKeywords')->name('search');
+
+// Route::get('/product/search/{keyword?}','productController@filterProductByKeywords')->name('search');
+
+// Route::get('/product/search/{maker?}','productController@filterProductByKeywords')->name('search');
 
 Auth::routes();
 // http://server.com/products/
@@ -30,5 +34,7 @@ Route::get('/','productController@showList')->name('list');
 Route::get('/product/edit/{id}','productController@showEdit')->name('edit');
 
 Route::post('/product/update','productController@exeUpdate')->name('update');
+
+// Route::get('/product/delete/{id}','productController@checkDelete');
 
 Route::post('/product/delete/{id}','productController@exeDelete')->name('delete');

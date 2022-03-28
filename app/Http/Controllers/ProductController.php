@@ -70,22 +70,9 @@ class ProductController extends Controller
      * @return view
      */
     public function filterProductByKeywords(Request $request) {
-
-        // Get the ke
-        // $keyword = $request->input('keyword');
-        // $maker = $request->input('company_id');
-
-
-        // $model = new Product();
-
-        // $products = $model->getProductByKeyword();
-
-        // return [
-        //     'a'=>1
-        // ];
-        dd($request);
-        echo "HELLO";
-        return view('product.list', ['products' => 0]);
+        $model = new Product();
+        $result = $model->searchProduct($request->keyword, $request->maker, $request->rowPrice, $request->highPrice, $request->rowStock, $request->highStock);
+        return json_encode($result);
     }
 
     /**
@@ -226,12 +213,23 @@ class ProductController extends Controller
         return redirect(route('edit', $product->id));
     }
 
+
+    /**
+     * 商品削除のget
+     * 
+     */
+    public function checkDelete() {
+        echo 'チェック';
+    }
+
     /**
      * 商品削除
      * @param $id
      * @return view
      */
-    public function exeDelete($id){
+    public function exeDelete(Request $request){
+
+        $id = Product::findOrFail($request->btnid);
 
         if(empty($id)){
             \Session::flash('err_msg', 'データがありません');
