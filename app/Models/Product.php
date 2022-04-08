@@ -109,6 +109,40 @@ class Product extends Model
         return $product_query;
     }
 
+    public function getDeleteProduct($id) {
+        $product_query = Product::select('products.id as product_id', 'image_path as image_path', 'company_id as company_id', 'product_name as product_name', 'price as price', 'stock as stock', 'comment as comment', 'companies.company_name as company_name')
+        ->where('products.id', $id)
+        ->first();
+
+        return $product_query;
+    }
+
+    public function orderID() {
+
+        $sort_query = DB::table('products')
+                ->orderBy('id', 'desc')
+                ->get();
+
+        return $sort_query;
+    }
+
+    public function orderMaker() {
+
+    }
+
+    public function orderName() {
+
+    }
+
+    public function orderPrice() {
+
+    }
+
+    public function orderStock() {
+
+    }
+
+
     //テーブル名
     protected $table = 'products';
 

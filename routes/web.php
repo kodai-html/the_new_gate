@@ -37,4 +37,6 @@ Route::post('/product/update','productController@exeUpdate')->name('update');
 
 // Route::get('/product/delete/{id}','productController@checkDelete');
 
-Route::post('/product/delete/{id}','productController@exeDelete')->name('delete');
+Route::post('/product/delete','productController@exeDelete')->name('delete');
+
+Route::post('/product/order/id','productController@sortID')->name('orderID');

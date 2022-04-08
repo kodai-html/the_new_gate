@@ -34,6 +34,18 @@
                 <input type="submit" value="検索" class="btn btn-info ml-3">
             </form>
         </div>
+
+        <form method="post" action="{{ route('orderID') }}">
+            <div class="form-check form-check-inline">
+                <input type="radio" name="release" class="form-check-input" id="release1" value="昇順" checked>
+                <label for="release1" class="form-check-label">ID昇順</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" name="release" class="form-check-input" id="release2" value="降順" >
+                <label for="release2" class="form-check-label">ID降順</label>
+            </div>
+        <p><input type="submit" value="並び替え"></p>
+
         <table id="sortTable" class="table sortTable">
             <thead>
                 <tr>

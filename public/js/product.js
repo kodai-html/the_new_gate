@@ -1,24 +1,7 @@
-function checkDelete() {
-  if(window.confirm('削除してよろしいですか')) {
-    return true;
-  } else {
-    return false;
-  }
-}
 
+jQuery.noConflict();
 $(function() {
-  function searchForm(data) {
-    //以下は検索機能
-
-  }
-  // console.log('called')
   $('.form-inline').on('submit', function(e) {
-
-    // $.ajaxSetup({
-    //   headers: {
-    //     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-    //   },
-    // });
 
     e.preventDefault();
     var textField = $('.keyword');
@@ -55,12 +38,17 @@ $(function() {
     })
     .done(function(data) {
       const productsList = $('#products-list');
+
+      console.log('通信成功だよ〜ん');
     
       // Delete all the list rows
-      //ジェークエリーに書き直す
       document.querySelectorAll('#products-list > tr').forEach(row => {
         row.remove()
       });
+      
+      let url = $(location).attr('origin') + $(location).attr('pathname');
+      console.log(url);
+
       
       if (data.length > 0) {
         data.forEach(product => {
@@ -71,117 +59,71 @@ $(function() {
               <td>${product.product_name}</td>
               <td>${product.price}</td>
               <td>${product.stock}</td>
-              <td><img src="${ window.location.href }/storage/${product.image_path}" alt="${product.product_name}" width=100% /></td>
-              <td><a href="${ window.location.href }/product/${product.product_id}" class="btn btn-primary">詳細表示</a></td>
-              <td><a href="#" class="product-delete-button btn btn-primary">削除</a></td>
+              <td><img src="${ url }/storage/${product.image_path}" alt="${product.product_name}" width=100% /></td>
+              <td><a href="${ url }/product/${product.product_id}" class="btn btn-primary">詳細表示</a></td>
+              <td id="parents"><a href="#" data-product-id="${product.product_id}" class="product-delete-button btn btn-primary">削除</a></td>
             </tr>
           `;
-  
+
           productsList.append(newRow);
         })
       }
+
     })
     .fail(function() {
       console.log('errorですよ！');
     });
+    //クラス付与の確認
+    let check = $('a').hasClass('product-delete-button');
+ 
+    console.log( check );
   });
 
-  // $('.product-delete-button').forEach(button => button.on('click', (e) => {
-  //   console.log('clicked')
-  //   const targetProductId = e.target.getAttribute('data-product-id');
-  //   console.log(e.target);
-  //   // Ajax call to delete product of the id.
-
-  // }));
-
-  // $(function() {
-  //   $('.product-delete-button').on('click', function() {
-  //     var deleteConfirm = confirm('削除してよろしいでしょうか？');
-
-  //     console.log('called');
-  
-  //     if(deleteConfirm == true) {
-  //       var clickEle = $(this)
-  //       // 削除ボタンにユーザーIDをカスタムデータとして埋め込んでます。
-  //       var productID = clickEle.attr('data-product-id');
-
-  //       console.log(productID);
-
-  //       $.ajax({
-  //         headers: {
-  //           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //         },
-  //         type: 'POST',
-  //         url: 'product/delete/' + productID,
-  //         data: {'id': productID,
-  //         '_method': 'DELETE'},
-  //         datatype: "json"
-  //       })
-  
-  //      .done(function() {
-  //         // 通信が成功した場合、クリックした要素の親要素の <tr> を削除
-  //         clickEle.parents('tr').remove();
-  //         console.log('通信成功');
-  //       })
-  
-  //      .fail(function() {
-  //         alert('エラー');
-  //       });
-  
-  //     } else {
-  //       (function(e) {
-  //         e.preventDefault()
-  //       });
-  //     };
-  //   });
-  // });
-
 });
+
+//削除機能呼び出し
+jQuery.noConflict();
 $(function() {
-  $(".product-delete-button").on('click', function(){
-    $(function(){
-      $('a').on('click',function(event){
-        event.preventDefault();
+  $(document).on('click','.product-delete-button', function() {
+
+    let clickEle = $(this);
+    // 削除ボタンにユーザーIDをカスタムデータとして埋め込んでます。
+    let productID = clickEle.attr('data-product-id');
+
+    if(confirm('削除してよろしいでしょうか？')) {
+
+      $.ajax({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        url: 'product/delete',
+        data: {'id': productID},
+        datatype: "json"
+      })
+      .done(function() {
+        console.log('通信成功!');
+
+        clickEle.closest("tr").remove();
+      })
+  
+      .fail(function() {
+        console.log('エラー');
       });
-    });
-    var deleteConfirm = confirm('削除してよろしいでしょうか？');
   
-    console.log('called');
-  
-    if(deleteConfirm == true) {
-      var btnid = $(this).data("id");
-      deleteData(btnid);
-    }
+    } else {
+      (function(e) {
+        e.preventDefault()
+      });
+    };
   });
-  
-  function deleteData(btnid) {
-    $.ajax({
-      type: 'POST',
-      dataType:'json',
-      //データを投げる先のphpを指定。
-      url:'product/delete/' + btnid,
-      data:{
-          btnid:btnid,
-      }
-    }
-  )};
 });
 
-$(function() {
-  $("#sortTable").tablesorter(); 
-  console.log('calleddd');
-}); 
+//ソート機能
+// jQuery.noConflict();
+// $(function() {
+//   $("#sortTable").tablesorter(); 
+//   console.log('ソート');
+// }); 
 
-// $(function(){
-//   $('#sortTable').tablesorter({
-//     headers: {
-//       0: { sorter: "digit"}, /// => テキストとしてソート
-//       1: { sorter: "text"}, /// => テキストとしてソート
-//       2: { sorter: "text"}, /// => 数値としてソート
-//       3: { sorter: "digit"},
-//       4: { sorter: "digit"},
-//       5: { sorter: false }
-//     },
-//     sortList: [[0,1],[2,0]],  
-//   });
-// });
+

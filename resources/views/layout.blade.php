@@ -9,6 +9,7 @@
         <title>@yield('title')</title>
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>

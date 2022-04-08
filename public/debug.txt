@@ -1,0 +1,85 @@
+'6'App\Models\Product::__set_state(array(
+   'table' => 'products',
+   'fillable' => 
+  array (
+    0 => 'product_name',
+    1 => 'company_id',
+    2 => 'price',
+    3 => 'stock',
+    4 => 'comment',
+    5 => 'image_path',
+  ),
+   'connection' => 'mysql',
+   'primaryKey' => 'id',
+   'keyType' => 'int',
+   'incrementing' => true,
+   'with' => 
+  array (
+  ),
+   'withCount' => 
+  array (
+  ),
+   'perPage' => 15,
+   'exists' => true,
+   'wasRecentlyCreated' => false,
+   'attributes' => 
+  array (
+    'id' => 6,
+    'product_name' => 'スマホ',
+    'company_id' => 2,
+    'price' => 555,
+    'stock' => 555,
+    'comment' => 'スマートフォン',
+    'image_path' => 'eVCWSEWIzVe8AQW52JNeXoVNtHU14EGeKih7qAYE.jpg',
+    'created_at' => '2022-02-19 21:40:12',
+    'updated_at' => '2022-02-19 21:40:12',
+  ),
+   'original' => 
+  array (
+    'id' => 6,
+    'product_name' => 'スマホ',
+    'company_id' => 2,
+    'price' => 555,
+    'stock' => 555,
+    'comment' => 'スマートフォン',
+    'image_path' => 'eVCWSEWIzVe8AQW52JNeXoVNtHU14EGeKih7qAYE.jpg',
+    'created_at' => '2022-02-19 21:40:12',
+    'updated_at' => '2022-02-19 21:40:12',
+  ),
+   'changes' => 
+  array (
+  ),
+   'casts' => 
+  array (
+  ),
+   'dates' => 
+  array (
+  ),
+   'dateFormat' => NULL,
+   'appends' => 
+  array (
+  ),
+   'dispatchesEvents' => 
+  array (
+  ),
+   'observables' => 
+  array (
+  ),
+   'relations' => 
+  array (
+  ),
+   'touches' => 
+  array (
+  ),
+   'timestamps' => true,
+   'hidden' => 
+  array (
+  ),
+   'visible' => 
+  array (
+  ),
+   'guarded' => 
+  array (
+    0 => '*',
+  ),
+))

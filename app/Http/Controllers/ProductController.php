@@ -213,15 +213,6 @@ class ProductController extends Controller
         return redirect(route('edit', $product->id));
     }
 
-
-    /**
-     * 商品削除のget
-     * 
-     */
-    public function checkDelete() {
-        echo 'チェック';
-    }
-
     /**
      * 商品削除
      * @param $id
@@ -229,16 +220,25 @@ class ProductController extends Controller
      */
     public function exeDelete(Request $request){
 
-        $id = Product::findOrFail($request->btnid);
+        $model = new Product();
+
+        $id = Product::find($request["id"]);
 
         if(empty($id)){
             \Session::flash('err_msg', 'データがありません');
             return redirect(route('list'));
         }
-        try{
-            Product::destroy($id);
 
+        \DB::BeginTransaction();
+        try{
+            // $model
+            // ->getDeleteProduct($request["id"])
+            // ->delete();
+            $model->where('id', $request['id'])->delete();
+            \DB::commit();
         }catch(\Throwable $e) {
+            \DB::rollback();
+            $e->getMessage();
             abort(500);
         }
 
@@ -246,5 +246,22 @@ class ProductController extends Controller
         return redirect(route('list'));
     }
 
-}
+    /**
+     * IDで並べ替え
+     * 
+     * 
+     */
+    public function sortID(Request $request) {
+        $model = new Product();
 
+        $result = $request->release;
+
+        if($result == "降順") {
+            $sorted = $model->orderID();
+            dd($sorted);
+
+        } else {
+            return redirect(route('list'));
+        }
+    }
+}
