@@ -10,6 +10,19 @@
             </p>
         @endif
         <div class="m-5">
+        <select class="pull-right" id="order" name="order">
+            <option value=""></option>
+            <option value="ID昇順">ID昇順</option>
+            <option value="ID降順">ID降順</option>
+            <option value="メーカー昇順">メーカー昇順</option>
+            <option value="メーカー降順">メーカー降順</option>
+            <option value="商品名昇順">商品名昇順</option>
+            <option value="商品名降順">商品名降順</option>
+            <option value="値段昇順">値段昇順</option>
+            <option value="値段降順">値段降順</option>
+            <option value="在庫数昇順">在庫数昇順</option>
+            <option value="在庫数降順">在庫数降順</option>
+        </select>   
             <form class="form-inline">
                 <input type="text" name="keyword" class="keyword form-control" placeholder="商品名を入力してください">
           
@@ -27,24 +40,13 @@
                 <p>〜</p>
                 <input type="integer" name="highPrice" class="highPrice form-control ml-3" placeholder="上限金額を入力してください">
                 <br>
-                <input type="integer" name="rowStock" class="rowStock form-control ml-3" placeholder="下限在庫を入力してください">
+                <input type="integer" name="rowStock" class="rowStock form-control ml-3" placeholder="下限在庫を入力してくだ    さい">
                 <p>〜</p>
                 <input type="integer" name="highStock" class="highStock form-control ml-3" placeholder="上限在庫を入力してください">
 
                 <input type="submit" value="検索" class="btn btn-info ml-3">
             </form>
         </div>
-
-        <form method="post" action="{{ route('orderID') }}">
-            <div class="form-check form-check-inline">
-                <input type="radio" name="release" class="form-check-input" id="release1" value="昇順" checked>
-                <label for="release1" class="form-check-label">ID昇順</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input type="radio" name="release" class="form-check-input" id="release2" value="降順" >
-                <label for="release2" class="form-check-label">ID降順</label>
-            </div>
-        <p><input type="submit" value="並び替え"></p>
 
         <table id="sortTable" class="table sortTable">
             <thead>
@@ -70,9 +72,7 @@
                     <td  width: 10%>{{ $product->stock }}</td>
                     <td ><img src="{{ asset('/storage/' . $product->image_path) }}" alt="写真" width=100% /></td>
                     <td><a href="{{ route('detail', $product->product_id) }}" class="btn btn-primary">詳細表示</a></td>
-                    <!-- <form method="POST" action="{{ route('delete', $product->product_id) }}" onSubmit="return checkDelete()"> -->
                     @csrf
-                    <!-- <td><button type="submit" data-product-id="{{ $product->product_id  }}" class="product-delete-button btn btn-primary">削除</button></td> -->
                     <td><a href="#" id="product-delete-button" data-product-id="{{ $product->product_id  }}" class="product-delete-button btn btn-primary">削除</a></td>
                 </tr>
             @endforeach

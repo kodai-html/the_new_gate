@@ -59,6 +59,8 @@ class ProductController extends Controller
         if(empty($keyword) && empty($maker)) {
 
             $products = $model->getAllProduct();
+
+            // dd($products);
             
             return view('product.list', ['products' => $products], ['companies' => $companies]);
         }
@@ -70,9 +72,12 @@ class ProductController extends Controller
      * @return view
      */
     public function filterProductByKeywords(Request $request) {
+        
         $model = new Product();
-        $result = $model->searchProduct($request->keyword, $request->maker, $request->rowPrice, $request->highPrice, $request->rowStock, $request->highStock);
+
+        $result = $model->searchProduct($request->order, $request->keyword, $request->maker, $request->rowPrice, $request->highPrice, $request->rowStock, $request->highStock);
         return json_encode($result);
+
     }
 
     /**
@@ -252,16 +257,28 @@ class ProductController extends Controller
      * 
      */
     public function sortID(Request $request) {
+
         $model = new Product();
 
+        // dd($request);
         $result = $request->release;
 
         if($result == "降順") {
             $sorted = $model->orderID();
-            dd($sorted);
+            // dd($sorted);
+
+            return view(route('list', [
+                'product' => $sorted
+            ]));
 
         } else {
             return redirect(route('list'));
         }
+    }
+
+    public function index()
+    {
+        $products =  Product::sortable()->get(); //sortable() を先に宣言
+        return view('product.list')->with('product', $products);
     }
 }
